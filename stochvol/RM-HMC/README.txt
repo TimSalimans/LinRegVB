@@ -1,0 +1,1 @@
+All code in here is by Girolami et al., with very small modifications by Tim Salimans.
