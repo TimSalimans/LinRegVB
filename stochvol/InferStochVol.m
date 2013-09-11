@@ -5,7 +5,7 @@
 clc
 
 % set seed
-rng(12345,'twister')
+rng(1234,'twister')
 
 % get data
 load PoundDollar

@@ -5,7 +5,7 @@ load RM-HMC/Results/RMHMC_sample
 load LinRegRes
 
 % sample from approximation
-nrOfSamples = 1000;
+nrOfSamples = 5000;
 [phiDraws,varDraws] = SamplePhiAndVar(postParPhi,postParVar,nrOfSamples);
 
 % get means and variances for Beta

@@ -184,15 +184,11 @@ function jac = DerivativeBetaSampler(betaDraws,par)
 dif = 1e-6;
 logPar = log(par+1);
 
-% bpdf = exp(par(1)*log(betaDraws) + par(2)*log(1-betaDraws))./beta(par(1)+1,par(2)+1);
-% jac = -[(betacdf(betaDraws,exp(logPar(1)+dif),par(2)+1)-...
-%     betacdf(betaDraws,exp(logPar(1)-dif),par(2)+1))./(2*dif*bpdf*(par(1)+1)), ....
-%     (betacdf(betaDraws,par(1)+1,exp(logPar(2)+dif))-...
-%     betacdf(betaDraws,par(1)+1,exp(logPar(2)-dif)))./(2*dif*bpdf*(par(2)+1))];
-
-p = betacdf(betaDraws,par(1)+1,par(2)+1);
-jac = [(betainv(p,exp(logPar(1)+dif),par(2)+1)-betainv(p,exp(logPar(1)-dif),par(2)+1))./(2*dif*(1+par(1))), ...
-    (betainv(p,par(1)+1,exp(logPar(2)+dif))-betainv(p,par(1)+1,exp(logPar(2)-dif)))./(2*dif*(1+par(2)))];
+bpdf = exp(par(1)*log(betaDraws) + par(2)*log(1-betaDraws))./beta(par(1)+1,par(2)+1);
+jac = -[(betacdf(betaDraws,exp(logPar(1)+dif),par(2)+1)-...
+    betacdf(betaDraws,exp(logPar(1)-dif),par(2)+1))./(2*dif*bpdf*(par(1)+1)), ....
+    (betacdf(betaDraws,par(1)+1,exp(logPar(2)+dif))-...
+    betacdf(betaDraws,par(1)+1,exp(logPar(2)-dif)))./(2*dif*bpdf*(par(2)+1))];
 end
 
 % derivative of gamma sampler
@@ -201,10 +197,7 @@ function jac = DerivativeGammaSampler(gamDraws,par)
 dif = 1e-6;
 logPar = log(par(1)+1);
 
-% gpdf = exp(par(1)*log(gamDraws) - gamDraws -gammaln(par(1)+1));
-% jac = -(gamcdf(gamDraws,exp(logPar+dif),1)-...
-%     gamcdf(gamDraws,exp(logPar-dif),1))./(2*dif*gpdf*(par(1)+1));
-
-p = gamcdf(gamDraws,par+1,1);
-jac = (gaminv(p,exp(logPar+dif),1)-gaminv(p,exp(logPar-dif),1))./(2*dif*(1+par));
+gpdf = exp(par(1)*log(gamDraws) - gamDraws -gammaln(par(1)+1));
+jac = -(gamcdf(gamDraws,exp(logPar+dif),1)-...
+    gamcdf(gamDraws,exp(logPar-dif),1))./(2*dif*gpdf*(par(1)+1));
 end
