@@ -11,7 +11,7 @@ rng(1234,'twister')
 load PoundDollar
 
 % set the number of steps
-nrSteps = 500;
+nrSteps = 250;
 
 % prior parameters in natural parameterization
 priorParPhi=[20-1; 1.5-1];
